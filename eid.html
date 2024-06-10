@@ -1,0 +1,99 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid al-Adha Greeting Card</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Eid al-Adha Greeting</h1>
+        <p>Please enter your first name by English.</p>
+        <input type="text" id="visitorName" placeholder="Your name">
+        <button onclick="generateGreeting()">Get Greeting</button>
+        <div class="greeting" id="greeting">
+            <p id="greetingMessage"></p>
+            <p id="duaMessage"></p>
+            <img id="greetingImage" src="" alt="Eid al-Adha">
+        </div>
+    </div>
+    <div class="balloons" id="balloons"></div>
+
+    <script>
+        const myName = "Mohamed Emad";
+        const visitors = {
+             "Ahmed": "Ahmed.jpg",
+            "Emad": "Emad.jpg",
+            "Shereen": "Shereen.jpg",
+            "Faten": "faten.jpg",
+            "Mazen": "Mazen.jpg",
+            "Mohamed": "Mohamed.jpg",
+            "Mahmoud": "Mahmoud.jpg",
+            "Sherif": "sherif.jpg",
+            "ahmed": "Ahmed.jpg",
+            "emad": "Emad.jpg",
+            "shereen": "Shereen.jpg",
+            "faten": "faten.jpg",
+            "mazen": "Mazen.jpg",
+            "mohamed": "Mohamed.jpg",
+            "mahmoud": "Mahmoud.jpg",
+            "sherif": "sherif.jpg"
+        };
+        const duas = [
+            "May Allah accept your good deeds.",
+            "May this Eid bring joy and prosperity to you and your family.",
+            "Wishing you a blessed Eid filled with love and peace.",
+            "May Allah's blessings be with you today and always.",
+            "Eid Mubarak! May the guidance and blessings of Allah be with you."
+        ];
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        }
+
+        function generateGreeting() {
+            let visitorName = document.getElementById('visitorName').value.trim();
+            if (visitorName) {
+                visitorName = capitalizeFirstLetter(visitorName);
+                const greetingMessage = `${myName} wishes you a happy Eid El-Adha, ${visitorName}!`;
+                document.getElementById('greetingMessage').textContent = greetingMessage;
+
+                const randomDua = duas[Math.floor(Math.random() * duas.length)];
+                document.getElementById('duaMessage').textContent = randomDua;
+
+                const imageUrl = visitors[visitorName] || 'https://example.com/default.jpg'; // استبدل الرابط برابط صورة افتراضية
+                document.getElementById('greetingImage').src = imageUrl;
+                document.getElementById('greeting').style.display = 'block';
+
+                generateBalloons();
+            } else {
+                alert('Please enter your name.');
+            }
+        }
+
+        function generateBalloons() {
+            const balloonContainer = document.getElementById('balloons');
+            balloonContainer.innerHTML = ''; // Clear existing balloons
+            for (let i = 0; i < 20; i++) { // Number of balloons
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                balloonContainer.appendChild(balloon);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
+
+
